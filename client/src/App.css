@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+#tblLocation
+{
+  margin-right: 500px;
+  margin-left: 500px;
+}
