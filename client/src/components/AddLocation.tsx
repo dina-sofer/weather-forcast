@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { getByName } from '../api/weatherForecast';
 
+import { LocationInterface } from '../interfaces/location'
+
+import { getWeatherByName } from '../api/weatherForecast';
 import { createLocation } from '../api/location'
 
-export interface Location {
-    locationName: string;
-    temp: Number,
-    humidity: Number
-}
-
-const AddLocation = (props:any) => {
+const AddLocation = (props: any) => {
 
     const [open, setOpen] = useState(false);
     const [newLocation, setNewLocation] = useState('');
@@ -25,14 +21,14 @@ const AddLocation = (props:any) => {
 
     const handleOnAdd = async () => {
         setOpen(false);
-        const location: Location = {
+
+        const location: LocationInterface = {
             locationName: newLocation,
             temp: 0,
             humidity: 0
         };
-        
 
-        getByName(location.locationName)
+        getWeatherByName(location.locationName)
         .then((data) => {
             location.temp = data.list[0].main.temp;
             location.humidity = data.list[0].main.humidity;
@@ -40,8 +36,7 @@ const AddLocation = (props:any) => {
         .then(() => {
             createLocation(location);;
             setNewLocation('');
-        })
-        
+        }) 
     }
 
     return(
