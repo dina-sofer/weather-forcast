@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import locations from '../locationsArr';
-import AllLocations from "./AllLocations";
+import { getByName } from '../api/weatherForecast';
 
-const AddLocation = () => {
+import { createLocation } from '../api/location'
+
+export interface Location {
+    locationName: string;
+    temp: Number,
+    humidity: Number
+}
+
+const AddLocation = (props:any) => {
 
     const [open, setOpen] = useState(false);
-    const [newLocation, setNewLocation] = useState("");
+    const [newLocation, setNewLocation] = useState('');
 
     const openDialog = () => {
         setOpen(true);
@@ -16,11 +23,25 @@ const AddLocation = () => {
         setOpen(false);
     }
 
-    const addNewLocation = () => {
+    const handleOnAdd = async () => {
         setOpen(false);
-        const loc = {name: newLocation}
-        locations.push(loc);
-         console.log(locations[locations.length-1]);
+        const location: Location = {
+            locationName: newLocation,
+            temp: 0,
+            humidity: 0
+        };
+        
+
+        getByName(location.locationName)
+        .then((data) => {
+            location.temp = data.list[0].main.temp;
+            location.humidity = data.list[0].main.humidity;
+        })
+        .then(() => {
+            createLocation(location);;
+            setNewLocation('');
+        })
+        
     }
 
     return(
@@ -55,7 +76,7 @@ const AddLocation = () => {
                     >Cancel
                     </Button>
                     <Button
-                        onClick={addNewLocation}
+                        onClick={ handleOnAdd }
                         fullWidth
                     >OK
                     </Button>
