@@ -4,16 +4,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { deleteLocation } from '../api/location'
 
+const DeleteLocation = (props: any) => {
 
-
-const DeleteLocation=(props: any)=> {
-
-    const handleDeleteLocation= () => {
+    const handleDeleteLocation = () => {
         const id = props.currentLocation._id;
         deleteLocation(id);
     }
 
-    return(
+    return (
         <>
             <IconButton aria-label="delete" size="large">
                 <DeleteIcon onClick={handleDeleteLocation} />

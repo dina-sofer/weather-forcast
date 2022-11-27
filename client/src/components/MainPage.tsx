@@ -1,12 +1,14 @@
 import React from "react";
+
 import AllLocations from "./AllLocations";
+import Forecast from "./Forecast";
 
 const MainPage = () => {
     return(
-        <>
-            <h1>Weather App</h1>
+        <div style={{margin: '50px', display: "flex"}}>
             <AllLocations/>
-        </>
+            <Forecast/>
+        </div>
     )
 }
 

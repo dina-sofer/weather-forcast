@@ -41,7 +41,7 @@ const AddLocation = (props: any) => {
 
     return(
         <>
-            <Button variant="outlined" onClick={openDialog}>
+            <Button variant='outlined' size='large' onClick={openDialog} sx={{marginBottom: "30px"}}>
                 + ADD LOCATION
             </Button>
 
