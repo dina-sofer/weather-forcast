@@ -1,6 +1,6 @@
 # weather-forcast
 
 ## Technologies:
-Node + React
+Node (Nest) + React
 
 🥳🥳🥳🥳🥳🥳🥳
